@@ -1,0 +1,32 @@
+{
+  "name": "mirsad-mobile-ready",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MIRSAD Free 1.0 Mobile Ready",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "bootstrap": "node bootstrap-owner.js",
+    "import-indicators": "node import-indicators.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "pdf-parse": "^1.1.1",
+    "pg": "^8.16.3",
+    "zod": "^4.1.5",
+    "mammoth": "^1.9.0",
+    "xlsx": "^0.18.5",
+    "tesseract.js": "^6.0.1"
+  }
+}
