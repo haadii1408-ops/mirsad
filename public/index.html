@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مرصاد - لوحة المؤشرات</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f7f9;
+      color: #222;
+    }
+
+    header {
+      background: #126b4a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    }
+
+    .number {
+      font-size: 32px;
+      color: #126b4a;
+      font-weight: bold;
+    }
+
+    button {
+      background: #126b4a;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>منصة مرصاد</h1>
+  <p>نموذج تجريبي لإدارة ومتابعة المؤشرات</p>
+</header>
+
+<main>
+
+  <h2>لوحة المؤشرات</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>المؤشرات الكلية</h3>
+      <div class="number">49</div>
+    </div>
+
+    <div class="card">
+      <h3>مؤشرات مكتملة</h3>
+      <div class="number">32</div>
+    </div>
+
+    <div class="card">
+      <h3>مؤشرات قيد المراجعة</h3>
+      <div class="number">12</div>
+    </div>
+
+    <div class="card">
+      <h3>مؤشرات تحتاج إجراء</h3>
+      <div class="number">5</div>
+    </div>
+
+  </div>
+
+  <button onclick="alert('سيتم إضافة مؤشر جديد في النسخة التجريبية')">
+    إضافة مؤشر
+  </button>
+
+</main>
+
+</body>
+</html>
