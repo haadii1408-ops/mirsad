@@ -16,7 +16,17 @@ services:
         value: 4h
       - key: MAX_UPLOAD_MB
         value: "25"
+      - key: CORS_ORIGIN
+        sync: false
       - key: DATABASE_URL
         sync: false
       - key: JWT_SECRET
         generateValue: true
+      - key: BOOTSTRAP_OWNER_EMAIL
+        sync: false
+      - key: BOOTSTRAP_OWNER_PASSWORD
+        sync: false
+      - key: BOOTSTRAP_OWNER_NAME
+        value: "مالك منصة مرصاد"
+      - key: AUTO_SEED_INDICATORS
+        value: "true"

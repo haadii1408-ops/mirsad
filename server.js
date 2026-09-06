@@ -60,13 +60,13 @@ const upload = multer({
 
 function sign(user){
   return jwt.sign({sub:user.id,role:user.role,schoolId:user.school_id||null},
-    process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRES_IN || '4h',issuer:'hadi'});
+    process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRES_IN || '4h',issuer:'mirsad'});
 }
 async function auth(req,res,next){
   try{
     const h=req.headers.authorization||'';
     if(!h.startsWith('Bearer ')) return res.status(401).json({message:'غير مصرح'});
-    const p=jwt.verify(h.slice(7),process.env.JWT_SECRET,{issuer:'hadi'});
+    const p=jwt.verify(h.slice(7),process.env.JWT_SECRET,{issuer:'mirsad'});
     const {rows}=await pool.query('SELECT u.id,u.name,u.email,u.role,u.school_id,u.active,s.name AS school_name FROM users u LEFT JOIN schools s ON s.id=u.school_id WHERE u.id=$1',[p.sub]);
     if(!rows[0]||!rows[0].active) return res.status(401).json({message:'الحساب غير متاح'});
     req.user=rows[0]; next();
@@ -81,7 +81,7 @@ async function audit(user,action,entityType,entityId,metadata={},schoolId=user?.
 }
 
 app.get('/health',async(_,res)=>{
-  try{await pool.query('SELECT 1');res.json({ok:true,service:'hadi',time:new Date().toISOString()})}
+  try{await pool.query('SELECT 1');res.json({ok:true,service:'mirsad',time:new Date().toISOString()})}
   catch{res.status(503).json({ok:false})}
 });
 
@@ -264,8 +264,9 @@ app.get('/api/audit',auth,async(req,res)=>{
   res.json({items:q.rows});
 });
 
+app.use(express.static(path.join(__dirname,'public')));
 app.use((req,res)=>{
-  if(req.method==='GET' && !req.path.startsWith('/api/')) return res.sendFile(path.join(__dirname,'index.html'));
+  if(req.method==='GET' && !req.path.startsWith('/api/')) return res.sendFile(path.join(__dirname,'public/index.html'));
   res.status(404).json({message:'المسار غير موجود'});
 });
 
@@ -276,7 +277,7 @@ app.use((err,req,res,next)=>{
   res.status(500).json({message:'حدث خطأ داخلي غير متوقع'});
 });
 
-const server = app.listen(PORT,()=>console.log(`HADI listening on :${PORT}`));
+const server = app.listen(PORT,()=>console.log(`MIRSAD listening on :${PORT}`));
 const shutdown = async signal => {
   console.log(`Received ${signal}; shutting down...`);
   server.close(async()=>{ await pool.end(); process.exit(0); });

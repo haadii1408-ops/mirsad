@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hadi}
+      POSTGRES_USER: ${POSTGRES_USER:-hadi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - hadi_pg:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-hadi} -d ${POSTGRES_DB:-hadi}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      TRUST_PROXY: ${TRUST_PROXY:-1}
+      DATABASE_URL: postgres://${POSTGRES_USER:-hadi}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-hadi}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-4h}
+      CORS_ORIGIN: ${CORS_ORIGIN:-}
+      UPLOAD_DIR: /app/storage
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-25}
+      BOOTSTRAP_OWNER_EMAIL: ${BOOTSTRAP_OWNER_EMAIL:-}
+      BOOTSTRAP_OWNER_PASSWORD: ${BOOTSTRAP_OWNER_PASSWORD:-}
+      BOOTSTRAP_OWNER_NAME: ${BOOTSTRAP_OWNER_NAME:-مالك منصة هادي}
+    ports:
+      - "127.0.0.1:${PORT:-3000}:3000"
+    volumes:
+      - hadi_uploads:/app/storage
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  hadi_pg:
+  hadi_uploads:

@@ -1,0 +1,13 @@
+{
+  "name": "مرصاد — منصة ذكاء الشواهد المدرسية",
+  "short_name": "مرصاد",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f7fa",
+  "theme_color": "#0d3b66",
+  "description": "منصة مرصاد لإدارة الشواهد وربطها بالمؤشرات وتحليل الفجوات.",
+  "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

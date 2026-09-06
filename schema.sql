@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS indicator_versions (
   active BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+CREATE UNIQUE INDEX IF NOT EXISTS indicator_versions_version_checksum_uq ON indicator_versions(version, checksum);
 
 CREATE TABLE IF NOT EXISTS evidence_recommendations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

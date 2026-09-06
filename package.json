@@ -1,17 +1,18 @@
 {
-  "name": "mirsad-mobile-ready",
-  "version": "1.0.0",
+  "name": "mirsad-free-1.1",
+  "version": "1.1.0",
   "private": true,
-  "description": "MIRSAD Free 1.0 Mobile Ready",
+  "description": "MIRSAD FREE 1.1 Mobile Ready - automatic database initialization, owner bootstrap, and ETEC indicator seeding",
   "type": "module",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node startup.js",
     "dev": "node --watch server.js",
     "bootstrap": "node bootstrap-owner.js",
-    "import-indicators": "node import-indicators.js"
+    "import-indicators": "node import-indicators.js",
+    "start-server": "node server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
