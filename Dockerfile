@@ -7,9 +7,9 @@ COPY package*.json ./
 RUN npm install --omit=dev --no-audit --no-fund && npm cache clean --force
 
 COPY server.js startup.js engine.cjs bootstrap-owner.js import-indicators.js ./
-COPY db ./db
+
 COPY public ./public
-COPY scripts ./scripts
+
 
 RUN mkdir -p /app/storage     && test -f /app/public/index.html     && chown -R node:node /app
 
