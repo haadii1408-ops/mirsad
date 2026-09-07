@@ -5,8 +5,8 @@ import bcrypt from 'bcryptjs';
 import pg from 'pg';
 
 const { Pool } = pg;
-const schemaPath = new URL('./db/schema.sql', import.meta.url);
-const seedPath = new URL('./db/indicator-seed.json', import.meta.url);
+const schemaPath = new URL('./schema.sql', import.meta.url);
+const seedPath = new URL('./indicator-seed.json', import.meta.url);
 const schemaSql = fs.readFileSync(schemaPath, 'utf8');
 const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
 
